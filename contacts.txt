@@ -1,0 +1,3 @@
+index|imie|nazwisko|numertel
+2|kacper||72312453
+3|michal|walczak|604213454
