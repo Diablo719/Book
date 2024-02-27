@@ -1,57 +1,79 @@
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
+import java.io.PrintWriter;
 
 public class FileManager {
 
-    public List<String> readAll(String path) throws IOException {
-        Path filepath = Path.of(path);
-        List<String> fileLines = Files.readAllLines(filepath);
-
-        return fileLines;
-    }
-
-    public int countRecords(String path) throws IOException {
-        Path filepath = Path.of(path);
-        List<String> fileLines = Files.readAllLines(filepath);
-        int linesNumber = fileLines.size();
-
-        return linesNumber;
-    }
-
-    public boolean fileExists(String path) {
+    public static boolean fileExists(String path) {
         File file = new File(path);
 
         if (file.exists() && file.isFile()) {
-            System.out.printf("File %s exists", path);
+            System.out.println("File exists");
             return true;
         }
-        System.out.printf("File %s does not exist", path);
+        System.err.println("File %s does not exist"+ path);
 
         return false;
     }
 
-    public void createFile(String path) {
+    public static void createFile(String path) {
         File file = new File(path);
         try {
             file.createNewFile();
-            System.out.printf("File %s created", path);
+            PrintWriter printWriter = new PrintWriter(path);
+            printWriter.println("index|imie|nazwisko|numertel");
+            printWriter.close();
+
         } catch (IOException e) {
-            System.out.printf("Error when creating file %s", path);
+            System.out.println("Error when creating file ");
             throw new RuntimeException(e);
         }
     }
 
-    public void deleteFile(String path) {
-        File file = new File(path);
-        if (fileExists(path)) {
-            file.delete();
-            System.out.printf("File %s removed", path);
-        } else {
-            System.out.printf("File %s does not exist", path);
-        }
+    public static void deleteAllContacts(String path){
+            File file = new File(path);
+            if (fileExists(path)) {
+                file.delete();
+                System.out.println("Contacts removed");
+                createFile(App.path);
+
+                if (!App.listContact.isEmpty()) {
+                    App.listContact = FileReader.readingFile();
+                }
+            } else {
+                System.err.println("File does not exist");
+            }
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+
+//    public List<String> readAll(String path) throws IOException {
+//        Path filepath = Path.of(path);
+//        List<String> fileLines = Files.readAllLines(filepath);
+//
+//        return fileLines;
+//    }
+//
+//    public int countRecords(String path) throws IOException {
+//        Path filepath = Path.of(path);
+//        List<String> fileLines = Files.readAllLines(filepath);
+//        int linesNumber = fileLines.size();
+//
+//        return linesNumber;
+//    }

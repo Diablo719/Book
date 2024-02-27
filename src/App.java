@@ -1,28 +1,23 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import java.util.ArrayList;
 
 public class App {
+    static String path ="./contacts.txt";
+    static ArrayList<Contact> listContact = new ArrayList<>();
+    static String way;
 
-    public static void main(String[] args) throws IOException {
-        FileManager fileManager = new FileManager();
 
-        final List<String> strings = fileManager.readAll();
+    public static void main(String[] args)  {
 
-        System.out.println(strings);
+        if(!FileManager.fileExists(path)) {
+            FileManager.createFile(path);
+        }
+         Menu.menu();
+
     }
-
-    private static void writeSingle(Contact contact) throws IOException {
-        FileWriter fileWriter = new FileWriter("contacts.txt");
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-
-        printWriter.println(contact.toString());
-        printWriter.close();
-    }
-
 
 }
+
+
 
 //0. czy plik istnieje jako baza
 //----------------------------------------
@@ -37,3 +32,56 @@ public class App {
 //7. wypisywanie rekordow po kolei
 //8. wyszukiwanie rekordow
 //9. konstruktor -> file manager calkowicie dla konkretnego pliku
+
+
+
+
+
+
+//        int strings = fileManager.countRecords(path)
+//        System.out.println(strings);
+//        fileManager.createFile(path);
+//        PrintWriter printWriter = new PrintWriter(path);
+//        printWriter.println("index|imie|nazwisko|numertel");
+//        AddContact.writeSingle();
+
+//        Scanner sc = new Scanner(System.in);
+//            String n = sc.next();
+//            int i = sc.nextInt();
+//            String p = sc.next();
+//            Contact contact2 = new Contact();
+//            contact2.firstName = n;
+//            contact2.index = i;
+//            contact2.phoneNumber = p;
+//        System.out.println(strings);
+        //    AddContact.addNewContact(path,contactFormatter.mapContactToSingleLine(contact2));
+       // System.out.println(contactFormatter.mapContactToSingleLine(contact2));
+      //  AddContact.addNewContact(path,contactFormatter.mapContactToSingleLine(contact2));
+//            System.out.println( contactFormatter.mapContactToSingleLine(Contact ccontact2);
+       // System.out.println( contactFormatter.mapContactToSingleLine(contact2));
+//            AddContact.addNewContact(path,contactFormatter.mapContactToSingleLine(contactFormatter.getContactFromSingleLine(string)));
+
+
+            // contactFormatter.getContactFromSingleLine(string);
+
+//
+
+         //   System.out.println("");
+//        } catch (IOException e) {
+//            System.out.println("");
+//            e.printStackTrace();
+//        }
+//    }
+
+
+      //   final List<String> strings = fileManager.readAll(path);
+        //System.out.println();
+       // createFile(Path.of("./contacts.txt"));
+      // System.out.println(strings);
+//    }
+
+
+
+
+
+
